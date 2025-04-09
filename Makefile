@@ -15,6 +15,12 @@ ifeq ($(shell uname -s), Darwin)
 endif
 
 SRC = src/main.c \
+		src/gc/application_gc.c \
+		src/gc/parser_gc.c \
+		src/parser/parser.c \
+		src/parser/parser_utils.c \
+		src/validator/file_validator.c \
+		src/validator/parser_validator.c \
 
 BUILD_DIR = build
 BIN_DIR = bin
