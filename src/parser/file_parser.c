@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 23:49:26 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/13 00:10:25 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/04/13 00:26:14 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	process_line(char *l, t_game *g)
 	else
 	{
 		if (g->map == NULL)
-			g->map = array_list_create(1); 
+			g->map = array_list_create(1);
 		array_list_add(g->map, l);
 	}
 }
@@ -48,13 +48,12 @@ void	print_game(t_game *g)
 {
 	int	i;
 
-	debug("Control so: %s\n", g->so_ptr);
 	debug("Control no: %s\n", g->no_ptr);
+	debug("Control so: %s\n", g->so_ptr);
 	debug("Control we: %s\n", g->we_ptr);
 	debug("Control ea: %s\n", g->ea_ptr);
 	debug("Control f: %s\n", g->floor->hex_str);
 	debug("Control c: %s\n", g->ceiling->hex_str);
-
 	i = 0;
 	while (g->map->data[i])
 	{

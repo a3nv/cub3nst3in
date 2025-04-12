@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 11:25:51 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/12 20:10:32 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/04/13 00:24:08 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 
 /**
- * @brief Parses the part of the configuration line with identifier and command 
+ * @brief Parses the part of the configuration line with identifier and command
  * a path to the texture file
  *
  * @param trimmed configuration linem it is not gurantted that in between of an
@@ -59,7 +59,7 @@ void	parse_texture_configuration(char *l, t_game *g)
 void	parse_color_configuration(char *l, t_game *g)
 {
 	char	**colors;
-	t_pair *p;	
+	t_pair *p;
 	t_rgb	*rgb;
 
 	rgb = malloc(sizeof(t_rgb));
@@ -76,7 +76,7 @@ void	parse_color_configuration(char *l, t_game *g)
 		g->floor = rgb;
 	else if (ft_strcmp(p->first, "C") == 0)
 		g->ceiling = rgb;
-	else 
+	else
 		error_exit("Unknown configuration\n", g);
 }
 
@@ -87,12 +87,15 @@ void	parse_color_configuration(char *l, t_game *g)
  * relevant information to update various fields in the provided game structure.
  * Control line consists of identifier followed by specific data:
  * - Texture identifiers (NO, SO, WE, EA) followed by a path to the texture file
- * - Color identifiers (F, C) followed by a string with the color in RGB format (e.g., "100,100,100")
+ * - Color identifiers (F, C) followed by a string with the color in RGB format
+ *   (e.g., "100,100,100")
  *
  * @param l A pointer to the trimmed string containing the control line to parse.
- * @param g A pointer to the t_game structure where parsed information will be stored.
+ * @param g A pointer to the t_game structure where parsed information will be
+ * stored.
  *
- * @note The function modifies fields in the game structure based on the content of @p l.
+ * @note The function modifies fields in the game structure based on the content
+ * of @p l.
  */
 void	parse_configuration_line(char *l, t_game *g)
 {
@@ -100,5 +103,5 @@ void	parse_configuration_line(char *l, t_game *g)
 	if(is_texture_configuration(l))
 		parse_texture_configuration(l, g);
 	else if (is_color_configuration(l))
-		parse_color_configuration(l, g);	
+		parse_color_configuration(l, g);
 }
