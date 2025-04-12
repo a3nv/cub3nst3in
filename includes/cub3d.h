@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:59:53 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/13 00:04:39 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/04/13 00:46:36 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@
 # include <fcntl.h> // open
 # include <unistd.h> // read, close
 
-#ifndef DEBUG
-# define DEBUG 0
-#endif
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
 
-typedef t_array_list t_al;
+typedef t_array_list	t_al;
 
 typedef struct s_rgb
 {
-	int	r;
-	int	g;
-	int	b;
-	int	hex;
+	int		r;
+	int		g;
+	int		b;
+	int		hex;
 	char	*hex_str;
 }	t_rgb;
 

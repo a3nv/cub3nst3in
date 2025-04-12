@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:59:27 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/13 00:11:33 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/04/13 00:19:31 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ int	main(int argc, char **argv)
 		error_exit("Invalid file extension. Please provide .cub file\n", NULL);
 	ft_bzero(&game, sizeof(t_game));
 	parse_map(argv[1], &game);
-	// todo: validate map
 	return (0);
 }

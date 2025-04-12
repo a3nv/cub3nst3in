@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:02:17 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/12 20:09:07 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/04/13 00:44:59 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	number_len(long number)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (number == 0)
@@ -34,21 +34,40 @@ int	number_len(long number)
 
 void	reverse(char *b, int len)
 {
-	int i = 0;
+	int		i;
+	char	t;
+
+	i = 0;
 	while (i < len / 2)
 	{
-		char t = b[i];
+		t = b[i];
 		b[i] = b[len - i -1];
 		b[len - i - 1] = t;
 		i++;
 	}
 }
 
+void	transform(unsigned int n, char *b, int *i)
+{
+	int		rem;
+
+	while (n != 0)
+	{
+		rem = n % 16;
+		if (rem < 10)
+			b[(*i)++] = rem + '0';
+		else
+			b[(*i)++] = rem - 10 + 'a';
+		n = n / 16;
+	}
+	b[*i] = '\0';
+}
+
 char	*itox(unsigned int n)
 {
-	int i;
-	int l;
-	char *b;
+	int		i;
+	int		l;
+	char	*b;
 
 	l = number_len(n);
 	b = malloc(sizeof(char) * l);
@@ -58,19 +77,10 @@ char	*itox(unsigned int n)
 	if (n == 0)
 	{
 		b[i++] = '0';
-		b[i] = '\0';	
+		b[i] = '\0';
 		return (NULL);
 	}
-	while (n != 0)
-	{
-		int rem = n % 16;
-		if ( rem < 10)
-			b[i++] = rem + '0';
-		else
-			b[i++] = rem - 10 + 'a';
-		n = n / 16;
-	}
-	b[i] = '\0';
-	reverse(b, i); 
+	transform(n, b, &i);
+	reverse(b, i);
 	return (b);
 }

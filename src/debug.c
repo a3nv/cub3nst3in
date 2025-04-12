@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 23:55:57 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/12 23:57:55 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/04/13 00:19:22 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	debug(const char *f, ...)
 {
-	va_list args;
+	va_list	args;
 
 	if (!DEBUG)
-		return;
+		return ;
 	va_start(args, f);
 	vprintf(f, args);
 	va_end(args);
