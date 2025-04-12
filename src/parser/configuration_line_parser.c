@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 11:25:51 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/13 00:24:08 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/04/13 00:47:39 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ void	parse_texture_configuration(char *l, t_game *g)
 	t_pair	*p;
 
 	p = parse_configuration(l);
-	if(ft_strncmp(p->first, "NO", 2) == 0)
+	if (ft_strncmp(p->first, "NO", 2) == 0)
 		g->no_ptr = ft_strdup(p->second);
-	else if(ft_strncmp(p->first, "SO", 2) == 0)
+	else if (ft_strncmp(p->first, "SO", 2) == 0)
 		g->so_ptr = ft_strdup(p->second);
-	else if(ft_strncmp(p->first, "WE", 2) == 0)
+	else if (ft_strncmp(p->first, "WE", 2) == 0)
 		g->we_ptr = ft_strdup(p->second);
-	else if(ft_strncmp(p->first, "EA", 2) == 0)
+	else if (ft_strncmp(p->first, "EA", 2) == 0)
 		g->ea_ptr = ft_strdup(p->second);
 	else
 		error_exit("Unknown configuration\n", g);
@@ -59,7 +59,7 @@ void	parse_texture_configuration(char *l, t_game *g)
 void	parse_color_configuration(char *l, t_game *g)
 {
 	char	**colors;
-	t_pair *p;
+	t_pair	*p;
 	t_rgb	*rgb;
 
 	rgb = malloc(sizeof(t_rgb));
@@ -99,8 +99,7 @@ void	parse_color_configuration(char *l, t_game *g)
  */
 void	parse_configuration_line(char *l, t_game *g)
 {
-
-	if(is_texture_configuration(l))
+	if (is_texture_configuration(l))
 		parse_texture_configuration(l, g);
 	else if (is_color_configuration(l))
 		parse_color_configuration(l, g);
