@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_validator.c                                   :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 23:49:50 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/12 16:33:28 by iasonov          ###   ########.fr       */
+/*   Created: 2025/04/12 23:55:57 by iasonov           #+#    #+#             */
+/*   Updated: 2025/04/12 23:57:55 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../includes/cub3d.h"
 
-int	is_valid_extension(char *file)
+void	debug(const char *f, ...)
 {
-	char	*extension;
+	va_list args;
 
-	extension = ft_strrchr(file, '.');
-	if (extension && ft_strncmp(extension, ".cub", 5) == 0)
-		return (1);
-	return (0);
+	if (!DEBUG)
+		return;
+	va_start(args, f);
+	vprintf(f, args);
+	va_end(args);
 }

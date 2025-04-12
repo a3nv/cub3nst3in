@@ -6,7 +6,7 @@
 #    By: iasonov <iasonov@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/22 22:56:57 by iasonov           #+#    #+#              #
-#    Updated: 2025/01/05 18:25:12 by iasonov          ###   ########.fr        #
+#    Updated: 2025/04/12 20:03:47 by iasonov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC	=	ft_atoi.c		\
 		ft_isprint.c	\
 		ft_isspace.c	\
 		ft_itoa.c		\
+		ft_itox.c		\
 		ft_memchr.c		\
 		ft_memcmp.c		\
 		ft_memcpy.c		\
