@@ -1,4 +1,4 @@
-# minishell
+# cub3nst3in
 
 ## Codecov
 
