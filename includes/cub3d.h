@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:59:53 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/09 23:55:56 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/04/13 00:04:39 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,36 @@
 # include <fcntl.h> // open
 # include <unistd.h> // read, close
 
+#ifndef DEBUG
+# define DEBUG 0
+#endif
+
+typedef t_array_list t_al;
+
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+	int	hex;
+	char	*hex_str;
+}	t_rgb;
+
 typedef struct s_game
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	char	**map;
+	t_al	*map;
+	char	*no_ptr;
+	char	*so_ptr;
+	char	*we_ptr;
+	char	*ea_ptr;
+	t_rgb	*ceiling;
+	t_rgb	*floor;
 	int		map_width;
 	int		map_height;
 	int		player_x;
 	int		player_y;
-	int		collectible_count;
-	int		move_count;
-	int		player_count;
-	int		exit_count;
-	int		was_on_exit;
 
 	// Image pointers for different game components
 	void	*wall_img;
@@ -45,8 +61,19 @@ typedef struct s_game
 // main.c
 void	error_exit(char *msg, t_game *game);
 
+// debug.c
+void	debug(const char *f, ...);
+
 // parser.c
-int		parse_map(char *file, t_game *game);
+void	parse_map(char *file, t_game *game);
+
+// configuration_line_parser.c
+void	parse_configuration_line(char *l, t_game *g);
+
+// configuration_line_parser_utils.c
+int		is_texture_configuration(char *l);
+int		is_color_configuration(char *l);
+int		is_configuration_line(char *l);
 
 // parser_gc.c
 void	exit_with_free(char	*map_str, char *msg, t_game *game);

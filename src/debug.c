@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 23:49:40 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/13 00:25:55 by iasonov          ###   ########.fr       */
+/*   Created: 2025/04/12 23:55:57 by iasonov           #+#    #+#             */
+/*   Updated: 2025/04/13 00:19:22 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../includes/cub3d.h"
 
-int	count_height(t_game *game)
+void	debug(const char *f, ...)
 {
-	int	i;
+	va_list	args;
 
-	i = 0;
-	while (game->map->data[i])
-		i++;
-	return (i);
-}
-
-void	set_map_dimensions(t_game *game)
-{
-	int	height;
-	int	width;
-
-	height = count_height(game);
-	game->map_height = height;
-	if (height > 0)
-		width = ft_strlen(game->map->data[0]);
-	else
-		width = 0;
-	game->map_width = width;
+	if (!DEBUG)
+		return ;
+	va_start(args, f);
+	vprintf(f, args);
+	va_end(args);
 }
