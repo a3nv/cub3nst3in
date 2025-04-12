@@ -1,10 +1,12 @@
+include sources.mk
+
 NAME = bin/cub3D
 DEBUG_NAME = bin/cub3D_debug
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -Iincludes -Ilibft
 LDFLAGS = -lreadline
-DEBUG_FLAGS = -DDEBUG_MODE=1
+DEBUG_FLAGS = -DDEBUG=1
 LIBFT_PATH = libft/
 LIBFT_LIB = $(LIBFT_PATH)libft.a
 
@@ -13,8 +15,6 @@ ifeq ($(shell uname -s), Darwin)
 	CFLAGS += -I$(READLINE_PREFIX)/include
 	LDFLAGS := -L$(READLINE_PREFIX)/lib $(LDFLAGS)
 endif
-
-SRC = src/main.c \
 
 BUILD_DIR = build
 BIN_DIR = bin

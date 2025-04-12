@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 22:49:26 by iasonov           #+#    #+#             */
-/*   Updated: 2025/02/20 21:19:06 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/04/12 20:12:21 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char			**ft_split(char const *s, char c);
 int				do_copy(char **dst, int length, const char *s, int start);
 char			**ft_split_mult(char *str, char *charset);
 char			*ft_itoa(int n);
+char			*itox(unsigned int n);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_striteri(char *s, void (*f)(unsigned int, char*));
 void			ft_putchar_fd(char c, int fd);
