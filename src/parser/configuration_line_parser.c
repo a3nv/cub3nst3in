@@ -6,43 +6,22 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 11:25:51 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/13 00:47:39 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/04/23 21:54:09 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-#include <stdlib.h>
 
-/**
- * @brief Parses the part of the configuration line with identifier and command
- * a path to the texture file
- *
- * @param trimmed configuration linem it is not gurantted that in between of an
- * identifier and path there will be a single space
- * @return a t_pair where first - is a key (identifier), second - a path to the
- * file. Path is trimmed of spaces, new line symbol and tabs.
- */
-t_pair	*parse_configuration(char *l)
-{
-	char	*sep_ptr;
-	long	key_size;
-	char	*k;
-	char	*v;
-
-	sep_ptr = ft_strchr(l, ' ');
-	if (!sep_ptr)
-		return (NULL);
-	key_size = sep_ptr - l;
-	k = ft_strndup(l, key_size);
-	v = ft_strtrim(ft_strdup(sep_ptr + 1), " \t\n");
-	return (create_pair(k, v));
-}
-
-void	parse_texture_configuration(char *l, t_game *g)
+bool	parse_texture_configuration(char *l, t_game *g)
 {
 	t_pair	*p;
 
 	p = parse_configuration(l);
+	if (!p)
+	{
+		set_error_message(g, "Failed parse configuration\n", E);
+		return (false);
+	}
 	if (ft_strncmp(p->first, "NO", 2) == 0)
 		g->no_ptr = ft_strdup(p->second);
 	else if (ft_strncmp(p->first, "SO", 2) == 0)
@@ -52,32 +31,70 @@ void	parse_texture_configuration(char *l, t_game *g)
 	else if (ft_strncmp(p->first, "EA", 2) == 0)
 		g->ea_ptr = ft_strdup(p->second);
 	else
-		error_exit("Unknown configuration\n", g);
+	{
+		set_error_message(g, "Unknown configuration identifier\n", E);
+		return (false);
+	}
 	free_pair(p);
+	return (true);
 }
 
-void	parse_color_configuration(char *l, t_game *g)
+bool	extract_rgb(t_game *g, t_pair *p, t_rgb *rgb)
 {
 	char	**colors;
-	t_pair	*p;
-	t_rgb	*rgb;
 
-	rgb = malloc(sizeof(t_rgb));
-	if (!rgb)
-		error_exit("Failed parse configuration\n", g);
-	p = parse_configuration(l);
 	colors = ft_split(p->second, ',');
+	if (!colors || !colors[0] || !colors[1] || !colors[2] || colors[3])
+	{
+		set_error_message(g, "Incorrect colors\n", E);
+		return (false);
+	}
 	rgb->r = ft_atoi(colors[0]);
 	rgb->g = ft_atoi(colors[1]);
 	rgb->b = ft_atoi(colors[2]);
 	rgb->hex = (rgb->r << 16) | (rgb->g << 8) | rgb->b;
 	rgb->hex_str = ft_strjoin("0x", itox(rgb->hex));
+	return (true);
+}
+
+bool	set_rgb(t_game *g, t_rgb *rgb, t_pair *p)
+{
 	if (ft_strcmp(p->first, "F") == 0)
 		g->floor = rgb;
 	else if (ft_strcmp(p->first, "C") == 0)
 		g->ceiling = rgb;
 	else
-		error_exit("Unknown configuration\n", g);
+	{
+		set_error_message(g, "Unknown configuration identifier\n", E);
+		return (free_pair(p), free(rgb), false);
+	}
+	fprintf(stderr, "at the end of set_rgb\n");
+	return (true);
+}
+
+bool	parse_color_configuration(char *l, t_game *g)
+{
+	t_pair	*p;
+	t_rgb	*rgb;
+
+	rgb = malloc(sizeof(t_rgb));
+	if (!rgb)
+	{
+		set_error_message(g, "Failed parse configuration\n", E);
+		return (false);
+	}
+	p = parse_configuration(l);
+	if (!p)
+	{
+		set_error_message(g, "Failed parse configuration\n", E);
+		return (free(rgb), false);
+	}
+	if (!extract_rgb(g, p, rgb))
+		return (free_pair(p), false);
+	if (!set_rgb(g, rgb, p))
+		return (false);
+	free_pair(p);
+	return (true);
 }
 
 /**
@@ -97,10 +114,11 @@ void	parse_color_configuration(char *l, t_game *g)
  * @note The function modifies fields in the game structure based on the content
  * of @p l.
  */
-void	parse_configuration_line(char *l, t_game *g)
+bool	parse_configuration_line(char *l, t_game *g)
 {
 	if (is_texture_configuration(l))
-		parse_texture_configuration(l, g);
+		return (parse_texture_configuration(l, g));
 	else if (is_color_configuration(l))
-		parse_color_configuration(l, g);
+		return (parse_color_configuration(l, g));
+	return (false);
 }

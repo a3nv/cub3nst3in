@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:59:53 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/13 00:46:36 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/04/19 23:16:18 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@
 # include <stdio.h>
 # include <fcntl.h> // open
 # include <unistd.h> // read, close
+# include <stdbool.h>
 
 # ifndef DEBUG
 #  define DEBUG 0
 # endif
+
+# define E 0
 
 typedef t_array_list	t_al;
 
@@ -56,6 +59,9 @@ typedef struct s_game
 	void	*player_img;
 	void	*exit_img;
 	void	*floor_img;
+
+	char	*error_message;
+	int		status;
 }	t_game;
 
 // main.c
@@ -68,12 +74,17 @@ void	debug(const char *f, ...);
 void	parse_map(char *file, t_game *game);
 
 // configuration_line_parser.c
-void	parse_configuration_line(char *l, t_game *g);
+bool	parse_texture_configuration(char *l, t_game *g);
+bool	parse_configuration_line(char *l, t_game *g);
+bool	parse_color_configuration(char *l, t_game *g);
+bool	extract_rgb(t_game *g, t_pair *p, t_rgb *rgb);
 
 // configuration_line_parser_utils.c
 int		is_texture_configuration(char *l);
 int		is_color_configuration(char *l);
 int		is_configuration_line(char *l);
+void	set_error_message(t_game *g, char *m, int s);
+t_pair	*parse_configuration(char *l);
 
 // parser_gc.c
 void	exit_with_free(char	*map_str, char *msg, t_game *game);

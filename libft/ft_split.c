@@ -6,111 +6,101 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 23:34:05 by iasonov           #+#    #+#             */
-/*   Updated: 2024/06/06 00:16:31 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/04/23 22:17:02 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_splits(char const *s, char c)
+int	count_splits(const char *s, char c)
 {
 	int	count;
-	int	in_substring;
 
 	count = 0;
-	in_substring = 0;
-	while (*s != '\0')
+	if (s == NULL || *s == '\0')
+		return (0);
+	while (*s)
 	{
-		if (*s != c && !in_substring)
-		{
-			in_substring = 1;
+		if (*s == c)
 			count++;
-		}
-		else if (*s == c)
+		s++;
+	}
+	return (count + 1);
+}
+
+int	add_token(char **res, int idx, const char *start, const char *ptr)
+{
+	int		len;
+	char	*token;
+
+	len = ptr - start;
+	if (len == 0)
+	{
+		res[idx] = NULL;
+		return (1);
+	}
+	token = malloc(len + 1);
+	if (!token)
+		return (0);
+	ft_strlcpy(token, start, len + 1);
+	res[idx] = token;
+	return (1);
+}
+
+void	free_res(char **res, int count)
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		free(res[i]);
+		i++;
+	}
+	free(res);
+}
+
+char	**split_loop(const char *s, char c,
+	char **res)
+{
+	int			idx;
+	const char	*start;
+
+	idx = 0;
+	start = s;
+	while (*s)
+	{
+		if (*s == c)
 		{
-			in_substring = 0;
+			if (add_token(res, idx, start, s) == 0)
+				return (free_res(res, idx), NULL);
+			idx++;
+			start = s + 1;
 		}
 		s++;
 	}
-	return (count);
+	if (add_token(res, idx, start, s) == 0)
+		return (free_res(res, idx), NULL);
+	return (res);
 }
 
-static int	word_len(const char *s, char c, int i, int start)
-{
-	if (s[i] != c)
-		i = i + 1;
-	if (s[i] == c || s[i] == '\0')
-	{
-		return (i - start);
-	}
-	else
-	{
-		return (i - start + 1);
-	}
-}
-
-int	do_copy(char **dst, int length, const char *s, int start)
-{
-	*dst = (char *)malloc((length + 1) * sizeof(char));
-	if (*dst == NULL)
-		return (0);
-	ft_strlcpy(*dst, &s[start], length +1);
-	(*dst)[length] = '\0';
-	return (1);
-}
-
-int	do_split(char **res, char const *s, char c, int count)
-{
-	int	i;
-	int	j;
-	int	start;
-
-	i = 0;
-	j = 0;
-	start = -1;
-	while (s[i] != '\0')
-	{
-		if (s[i] != c && start == -1)
-			start = i;
-		else if ((s[i] == c || s[i + 1] == '\0') && start != -1)
-		{
-			if (!do_copy(&res[j], word_len(s, c, i, start), s, start))
-				return (0);
-			start = -1;
-			j++;
-		}
-		i++;
-	}
-	if (j < count && !do_copy(&res[j], word_len(s, c, i, start), s, start))
-		return (0);
-	return (1);
-}
-
-char	**ft_split(char const *s, char c)
+char	**ft_split(const char *s, char c)
 {
 	char	**res;
 	int		count;
-	int		i;
+	char	**ok;
 
-	if (s == NULL)
+	if (s == NULL || *s == '\0')
 		return (NULL);
 	count = count_splits(s, c);
-	res = (char **)malloc((count + 1) * sizeof(char *));
+	res = malloc((count + 1) * sizeof(*res));
 	if (res == NULL)
 	{
 		return (NULL);
 	}
-	if (!do_split(res, s, c, count))
-	{
-		i = 0;
-		while (i < count)
-		{
-			free(res[i]);
-			i++;
-		}
-		free(res);
+	ok = split_loop(s, c, res);
+	if (ok == NULL)
 		return (NULL);
-	}
 	res[count] = NULL;
 	return (res);
 }

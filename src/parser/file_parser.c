@@ -6,28 +6,30 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 23:49:26 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/13 00:26:14 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/04/23 21:53:36 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	process_line(char *l, t_game *g)
+bool	process_line(char *l, t_game *g)
 {
 	char	*t;
 
 	if (!l || l == NULL || *l == '\n')
-		return ;
+		return (false);
 	if (is_configuration_line(l))
 	{
 		t = ft_strtrim(l, " \t\n");
-		parse_configuration_line(t, g);
+		return (parse_configuration_line(t, g));
 	}
 	else
 	{
 		if (g->map == NULL)
 			g->map = array_list_create(1);
 		array_list_add(g->map, l);
+		// todo validate that line has proper symbols only
+		return (true);
 	}
 }
 
@@ -36,9 +38,13 @@ void	read_map_lines(int fd, t_game *g)
 	char	*l;
 
 	l = get_next_line(fd);
-	while (l)
+	while (l && g->status != E)
 	{
-		process_line(l, g);
+		if (!process_line(l, g))
+		{
+			free(l);
+			break ;
+		}
 		free(l);
 		l = get_next_line(fd);
 	}
@@ -70,6 +76,7 @@ void	parse_map(char *file, t_game *g)
 	if (fd < 0)
 		error_exit("Failed to open map file\n", NULL);
 	read_map_lines(fd, g);
-	print_game(g);
+	if (g->status != E)
+		print_game(g);
 	close(fd);
 }
