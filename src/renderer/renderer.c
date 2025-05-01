@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   renderer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 23:49:40 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/13 00:25:55 by iasonov          ###   ########.fr       */
+/*   Created: 2025/04/24 00:05:38 by iasonov           #+#    #+#             */
+/*   Updated: 2025/04/24 00:09:52 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	count_height(t_game *game)
+int	render_next_frame(void *param)
 {
-	int	i;
+	t_game	*g;
+	int		x;
 
-	i = 0;
-	while (game->map->data[i])
-		i++;
-	return (i);
-}
-
-void	set_map_dimensions(t_game *game)
-{
-	int	height;
-	int	width;
-
-	height = count_height(game);
-	game->map_height = height;
-	if (height > 0)
-		width = ft_strlen(game->map->data[0]);
-	else
-		width = 0;
-	game->map_width = width;
+	g = (t_game *)param;
+	draw_floor_and_ceiling(g);
+	x = 0;
+	while (x < W_W)
+	{
+		cast_single_ray(g, x);
+		x++;
+	}
+	mlx_put_image_to_window(g->mlx_ptr,
+		g->win_ptr, g->img_ptr, 0, 0);
+	return (0);
 }

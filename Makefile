@@ -9,6 +9,17 @@ DEBUG_FLAGS := -DDEBUG=1
 LIBFT_PATH  := libft/
 LIBFT_LIB   := $(LIBFT_PATH)libft.a
 
+MLX_DIR = mlx/
+MLX_LIB = $(MLX_DIR)/libmlx.a
+
+ifeq ($(shell uname), Linux)
+    INCLUDES = -I/usr/include -Imlx
+    MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
+else
+    INCLUDES = -I/opt/X11/include -Imlx
+    MLX_FLAGS = -Lmlx -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit
+endif
+
 ifeq ($(shell uname -s), Darwin)
 	READLINE_PREFIX := $(shell brew --prefix readline)
 	CFLAGS += -I$(READLINE_PREFIX)/include
@@ -24,7 +35,7 @@ DEBUG_OBJECTS := $(addprefix $(BUILD_DIR)/, $(SRC:.c=_debug.o))
 
 default: all
 
-all: $(LIBFT_LIB) $(NAME) $(if $(SKIP_TESTS),,test_run)
+all: $(MLX_LIB) $(LIBFT_LIB) $(NAME) $(if $(SKIP_TESTS),,test_run)
 
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
@@ -36,11 +47,14 @@ $(BUILD_DIR)/%_debug.o: %.c
 
 $(NAME): $(OBJECTS)
 	@mkdir -p $(BIN_DIR)
-	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LIBFT_LIB) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(MLX_LIB) $(MLX_FLAGS) $(LIBFT_LIB) $(LDFLAGS)
 
 debug: $(LIBFT_LIB) $(DEBUG_OBJECTS)
 	@mkdir -p $(BIN_DIR)
 	$(CC) $(CFLAGS) $(DEBUG_FLAGS) -o $(DEBUG_NAME) $(DEBUG_OBJECTS) $(LIBFT_LIB) $(LDFLAGS)
+
+$(MLX_LIB):
+	@make -C $(MLX_DIR)
 
 $(LIBFT_LIB):
 	$(MAKE) bonus -C $(LIBFT_PATH)

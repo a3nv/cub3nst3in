@@ -12,25 +12,54 @@
 
 #include "../../includes/cub3d.h"
 
+
+bool	parse_map_line(char *l, t_game *g)
+{
+	int	row;
+	int	col;
+
+	if (g->map == NULL)
+	{
+		if (!is_map_line(l))
+			return (true);
+		g->map = array_list_create(1);
+	}
+	if (!is_map_line(l))
+		return (false);
+	array_list_add(g->map, l);
+	row = g->map->size - 1;
+	col = 0;
+	while (l[col])
+	{
+		if (l[col] == 'N' || l[col] == 'S' || l[col] == 'E' || l[col] == 'W')
+		{
+			g->player_x = col;
+			g->player_y = row;
+			g->start_dir = l[col];
+			g->pos_x = col + 0.5;
+			g->pos_y = row + 0.5;
+			g->map->data[row][col] = '0';
+		}
+		col++;
+	}
+	return (true);
+}
+
 bool	process_line(char *l, t_game *g)
 {
 	char	*t;
+	bool	r;
 
-	if (!l || l == NULL || *l == '\n')
+	if (!l || *l == '\0')
 		return (false);
 	if (is_configuration_line(l))
 	{
 		t = ft_strtrim(l, " \t\n");
-		return (parse_configuration_line(t, g));
+		r = parse_configuration_line(t, g);
+		return (free(t), r);
 	}
-	else
-	{
-		if (g->map == NULL)
-			g->map = array_list_create(1);
-		array_list_add(g->map, l);
-		// todo validate that line has proper symbols only
-		return (true);
-	}
+	r = parse_map_line(l, g);
+	return (r);
 }
 
 void	read_map_lines(int fd, t_game *g)
@@ -58,13 +87,18 @@ void	print_game(t_game *g)
 	debug("Control so: %s\n", g->so_ptr);
 	debug("Control we: %s\n", g->we_ptr);
 	debug("Control ea: %s\n", g->ea_ptr);
-	debug("Control f: %s\n", g->floor->hex_str);
-	debug("Control c: %s\n", g->ceiling->hex_str);
+	if (g->floor)
+		debug("Control f: %s\n", g->floor->hex_str);
+	if (g->ceiling)
+		debug("Control c: %s\n", g->ceiling->hex_str);
 	i = 0;
-	while (g->map->data[i])
+	if (g->map)
 	{
-		debug("Line %d: %s", i, g->map->data[i]);
-		i++;
+		while (g->map->data[i])
+		{
+			debug("Line %d: %s", i, g->map->data[i]);
+			i++;
+		}
 	}
 }
 

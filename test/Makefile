@@ -17,8 +17,8 @@ LIBFT_PATH := ../libft/
 LIBFT_LIB  := $(LIBFT_PATH)libft.a
 
 SRCS := \
-    ../src/parser/configuration_line_parser.c \
-		../src/parser/configuration_line_parser_utils.c \
+    ../src/parser/parser_configuration_line.c \
+		../src/parser/parser_utils_configuration_line.c \
 	   ../libft/arraylist/ft_array_list_add.c \
 	   ../libft/arraylist/ft_array_list_create.c \
 	   ../libft/arraylist/ft_array_list_get.c \

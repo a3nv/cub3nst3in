@@ -12,6 +12,8 @@
 
 #include "../../includes/cub3d.h"
 
+
+
 int	is_texture_configuration(char *l)
 {
 	return ((l[0] == 'N' && l[1] == 'O')

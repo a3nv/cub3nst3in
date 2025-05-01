@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 11:25:51 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/23 21:54:09 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/05/01 18:37:21 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ bool	set_rgb(t_game *g, t_rgb *rgb, t_pair *p)
 		set_error_message(g, "Unknown configuration identifier\n", E);
 		return (free_pair(p), free(rgb), false);
 	}
-	fprintf(stderr, "at the end of set_rgb\n");
 	return (true);
 }
 
@@ -77,6 +76,7 @@ bool	parse_color_configuration(char *l, t_game *g)
 	t_pair	*p;
 	t_rgb	*rgb;
 
+	// todo: move this initialization into init.c
 	rgb = malloc(sizeof(t_rgb));
 	if (!rgb)
 	{
@@ -118,7 +118,7 @@ bool	parse_configuration_line(char *l, t_game *g)
 {
 	if (is_texture_configuration(l))
 		return (parse_texture_configuration(l, g));
-	else if (is_color_configuration(l))
+	if (is_color_configuration(l))
 		return (parse_color_configuration(l, g));
 	return (false);
 }

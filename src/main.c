@@ -6,11 +6,13 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:59:27 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/15 22:33:21 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/04/29 22:28:54 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+
 
 void	error_exit(char *msg, t_game *game)
 {
@@ -23,19 +25,16 @@ void	error_exit(char *msg, t_game *game)
 
 int	main(int argc, char **argv)
 {
-	t_game	game;
+	t_game	*g;
 
 	if (argc != 2)
 		error_exit("Usage: ./cub3d <map_file.cub>\n", NULL);
 	if (!is_valid_extension(argv[1]))
 		error_exit("Invalid file extension. Please provide .cub file\n", NULL);
-	ft_bzero(&game, sizeof(t_game));
-	game.status = 1;
-	parse_map(argv[1], &game);
-	if (game.status == E)
-	{
-		error_exit(game.error_message, &game);
-		return (1);
-	}
+	g = init_game(argv[1]);
+	if (g->status == E)
+		error_exit(g->error_message, g);
+	mlx_loop_hook(g->mlx_ptr, render_next_frame, g);
+	mlx_loop(g->mlx_ptr);
 	return (0);
 }
