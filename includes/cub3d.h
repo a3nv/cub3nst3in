@@ -57,6 +57,34 @@ enum e_tex
 	TEX_EA
 };
 
+// # ifdef __linux__
+// // Linux
+enum e_keys
+{
+	KEY_W = 119,
+	KEY_E = 101,
+	KEY_A = 97,
+	KEY_S = 115,
+	KEY_D = 100,
+	KEY_ARROW_LEFT = 65361,
+	KEY_ARROW_RIGHT = 65363,
+	KEY_ESCAPE = 65307
+};
+// # else
+// // Mac
+// enum e_keys
+// {
+// 	KEY_W = 13,
+// 	KEY_E = 14,
+// 	KEY_A = 0,
+// 	KEY_S = 1,
+// 	KEY_D = 2,
+// 	KEY_ESCAPE = 53,
+// 	KEY_ARROW_LEFT = 123,
+// 	KEY_ARROW_RIGHT = 124,
+// };
+// # endif
+
 typedef struct s_game
 {
 	void	*mlx_ptr;
@@ -96,6 +124,14 @@ typedef struct s_game
 	double	plane_y;
 	double	move_speed;
 	double	rot_speed;
+
+	/* key states */
+	int		key_w;
+	int		key_s;
+	int		key_a;
+	int		key_d;
+	int		key_left;
+	int		key_right;
 
 	char	*error_message;
 	int		status;
@@ -179,5 +215,16 @@ void	do_dda(t_game *g, t_ray *r);
 void	compute_draw_parameters(t_game *g, t_ray *r);
 
 // void compute_step_side(t_game *g, t_ray *r);
+void	move_dir(t_game *g, double dx, double dy);
+void	rotate_player(t_game *g, double angle);
+
+// action_handler.c
+int		handle_exit(void *param);
+int		handle_keypress(int key, t_game *g);
+int		handle_keyrelease(int key, t_game *g);
+
+// move.c
+void	move_dir(t_game *g, double dx, double dy);
+void	rotate_player(t_game *g, double angle);
 
 #endif

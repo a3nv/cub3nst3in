@@ -69,7 +69,7 @@ void	do_dda(t_game *g, t_ray *r)
 			r->map_y += r->step_y;
 			r->side = 1;
 		}
-		if (g->map->data[r->map_y][r->map_x] == '1')
+		if (g->map->data[r->map_y][r->map_x] != '0')
 			hit = 1;
 	}
 	if (r->side == 0)
@@ -99,7 +99,7 @@ void	compute_draw_parameters(t_game *g, t_ray *r)
 	if (r->draw_end >= W_H)
 		r->draw_end = W_H - 1;
 	if (r->side == 0)
-		wall_x = g->pos_x + r->perp_wall_dist * r->ray_dir_y;
+		wall_x = g->pos_y + r->perp_wall_dist * r->ray_dir_y;
 	else
 		wall_x = g->pos_x + r->perp_wall_dist * r->ray_dir_x;
 	wall_x -= floor(wall_x);

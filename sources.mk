@@ -13,6 +13,8 @@
 SRC = src/main.c \
 	  src/init.c \
 	  src/debug.c \
+	  src/action_handler.c \
+	  src/move.c \
 		src/gc/application_gc.c \
 		src/gc/parser_gc.c \
 		src/parser/configuration_file_parser.c \
