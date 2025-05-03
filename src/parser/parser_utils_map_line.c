@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   parser_utils_map_line.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,26 +12,26 @@
 
 #include "../../includes/cub3d.h"
 
-int	count_height(t_game *game)
+bool	is_map_line(const char *l)
 {
-	int	i;
+	bool	has_map_char;
 
-	i = 0;
-	while (game->map->data[i])
-		i++;
-	return (i);
-}
-
-void	set_map_dimensions(t_game *game)
-{
-	int	height;
-	int	width;
-
-	height = count_height(game);
-	game->map_height = height;
-	if (height > 0)
-		width = ft_strlen(game->map->data[0]);
-	else
-		width = 0;
-	game->map_width = width;
+	has_map_char = false;
+	while (*l)
+	{
+		if (*l == ' ' || *l == '\t')
+			++l;
+		else if (*l == '0' || *l == '1'
+			|| *l == 'N' || *l == 'S'
+			|| *l == 'E' || *l == 'W')
+		{
+			has_map_char = true;
+			++l;
+		}
+		else if (*l == '\n' || *l == '\r')
+			++l;
+		else
+			return (false);
+	}
+	return (has_map_char);
 }
