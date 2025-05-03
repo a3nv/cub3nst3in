@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:45:35 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/29 22:27:53 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/05/03 22:27:53 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	set_defaults(t_game *g)
 	g->status = 1;
 }
 
-t_game	*init_game(char* file)
+t_game	*init_game(char *file)
 {
 	t_game	*g;
 

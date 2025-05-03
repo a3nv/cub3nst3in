@@ -1,5 +1,9 @@
 # cub3nst3in
 
+## Links and resources
+
+[Minilibx](https://github.com/42paris/minilibx-linux)
+
 ## Codecov
 
 When updating codecov.yml do not forget to validate it!

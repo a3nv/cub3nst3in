@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   configuration_line_parser.c                        :+:      :+:    :+:   */
+/*   parser_configuration_line.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 11:25:51 by iasonov           #+#    #+#             */
-/*   Updated: 2025/05/01 18:37:21 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/05/03 22:30:34 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ bool	parse_color_configuration(char *l, t_game *g)
 	t_pair	*p;
 	t_rgb	*rgb;
 
-	// todo: move this initialization into init.c
 	rgb = malloc(sizeof(t_rgb));
 	if (!rgb)
 	{

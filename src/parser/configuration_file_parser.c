@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_parser.c                                      :+:      :+:    :+:   */
+/*   configuration_file_parser.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 23:49:26 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/23 21:53:36 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/05/03 22:31:26 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-
 bool	parse_map_line(char *l, t_game *g)
 {
 	int	row;
-	int	col;
 
 	if (g->map == NULL)
 	{
@@ -26,22 +24,9 @@ bool	parse_map_line(char *l, t_game *g)
 	}
 	if (!is_map_line(l))
 		return (false);
-	array_list_add(g->map, l);
+	add_line_to_map(g, l);
 	row = g->map->size - 1;
-	col = 0;
-	while (l[col])
-	{
-		if (l[col] == 'N' || l[col] == 'S' || l[col] == 'E' || l[col] == 'W')
-		{
-			g->player_x = col;
-			g->player_y = row;
-			g->start_dir = l[col];
-			g->pos_x = col + 0.5;
-			g->pos_y = row + 0.5;
-			g->map->data[row][col] = '0';
-		}
-		col++;
-	}
+	find_player_start(g, l, row);
 	return (true);
 }
 

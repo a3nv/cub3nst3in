@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/03 22:28:00 by iasonov           #+#    #+#             */
+/*   Updated: 2025/05/03 22:28:15 by iasonov          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 /*
 ** Move in direction (dx,dy), with simple AABB collision
 */
-void move_dir(t_game *g, double dx, double dy)
+void	move_dir(t_game *g, double dx, double dy)
 {
 	double	nx;
 	double	ny;
@@ -21,7 +33,7 @@ void move_dir(t_game *g, double dx, double dy)
 /*
 ** Rotate dir and plane by angle (radians)
 */
-void rotate_player(t_game *g, double angle)
+void	rotate_player(t_game *g, double angle)
 {
 	double	old_dx;
 	double	old_px;

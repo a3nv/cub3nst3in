@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 22:23:58 by iasonov           #+#    #+#             */
-/*   Updated: 2025/05/01 22:24:00 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/05/04 00:04:26 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,47 +54,6 @@ void	init_render_buffer(t_game *g)
 		error_exit("Error\nFailed to create render buffer\n", g);
 	g->img_data = mlx_get_data_addr(g->img_ptr, &g->bpp,
 			&g->line_len, &g->endian);
-}
-
-/*
-** Set dir_x/dir_y + plane_x/plane_y from the map's N/S/E/W,
-** and give some sensible default speeds.
-*/
-void	init_camera(t_game *g)
-{
-	char	dir;
-
-	dir = g->start_dir;
-	if (dir == 'N')
-	{
-		g->dir_x = 0;
-		g->dir_y = -1;
-		g->plane_x = 0.66;
-		g->plane_y = 0;
-	}
-	else if (dir == 'S')
-	{
-		g->dir_x = 0;
-		g->dir_y = 1;
-		g->plane_x = -0.66;
-		g->plane_y = 0;
-	}
-	else if (dir == 'E')
-	{
-		g->dir_x = 1;
-		g->dir_y = 0;
-		g->plane_x = 0;
-		g->plane_y = 0.66;
-	}
-	else if (dir == 'W')
-	{
-		g->dir_x = -1;
-		g->dir_y = 0;
-		g->plane_x = 0;
-		g->plane_y = -0.66;
-	}
-	g->move_speed = 0.05;
-	g->rot_speed = 0.03;
 }
 
 /*

@@ -8,6 +8,7 @@ LDFLAGS     := -lreadline
 DEBUG_FLAGS := -DDEBUG=1
 LIBFT_PATH  := libft/
 LIBFT_LIB   := $(LIBFT_PATH)libft.a
+MATH_LIB = -lm
 
 MLX_DIR = mlx/
 MLX_LIB = $(MLX_DIR)/libmlx.a
@@ -35,7 +36,7 @@ DEBUG_OBJECTS := $(addprefix $(BUILD_DIR)/, $(SRC:.c=_debug.o))
 
 default: all
 
-all: $(MLX_LIB) $(LIBFT_LIB) $(NAME) $(if $(SKIP_TESTS),,test_run)
+all: $(LIBFT_LIB) $(NAME) $(if $(SKIP_TESTS),,test_run)
 
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
@@ -47,14 +48,16 @@ $(BUILD_DIR)/%_debug.o: %.c
 
 $(NAME): $(OBJECTS)
 	@mkdir -p $(BIN_DIR)
-	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(MLX_LIB) $(MLX_FLAGS) $(LIBFT_LIB) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(MLX_LIB) $(MLX_FLAGS) $(LIBFT_LIB) $(LDFLAGS) $(MATH_LIB)
 
 debug: $(LIBFT_LIB) $(DEBUG_OBJECTS)
 	@mkdir -p $(BIN_DIR)
 	$(CC) $(CFLAGS) $(DEBUG_FLAGS) -o $(DEBUG_NAME) $(DEBUG_OBJECTS) $(LIBFT_LIB) $(LDFLAGS)
 
 $(MLX_LIB):
-	@make -C $(MLX_DIR)
+	@if [ ! -f $(MLX_LIB) ]; then \
+		make -C $(MLX_DIR); \
+	fi
 
 $(LIBFT_LIB):
 	$(MAKE) bonus -C $(LIBFT_PATH)

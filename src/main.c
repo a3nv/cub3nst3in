@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:59:27 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/29 22:28:54 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/05/03 22:28:35 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	mlx(t_game *g)
 {
 	mlx_hook(g->win_ptr, 2, 1L << 0, handle_keypress, g);
 	mlx_hook(g->win_ptr, 3, 1L << 1, handle_keyrelease, g);
-	// mlx_hook(g->win_ptr, 6, 1L << 6, hook_mouse, g);
 	mlx_hook(g->win_ptr, 17, 0, handle_exit, g);
 	mlx_loop_hook(g->mlx_ptr, render_next_frame, g);
 	mlx_loop(g->mlx_ptr);

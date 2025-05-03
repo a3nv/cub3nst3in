@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   configuration_line_parser_utils.c                  :+:      :+:    :+:   */
+/*   parser_utils_configuration_line.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 11:34:49 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/23 21:54:27 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/05/03 22:30:15 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-
 
 int	is_texture_configuration(char *l)
 {

@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:59:53 by iasonov           #+#    #+#             */
-/*   Updated: 2025/05/01 18:50:59 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/05/04 00:11:20 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // # ifdef __linux__
 // #  include <mlx.h>
 // # else
-#  include "../mlx/mlx.h"
+# include "../mlx/mlx.h"
 // # endif
 # include <stdlib.h> // malloc, free
 # include <stdio.h>
@@ -159,6 +159,14 @@ typedef struct s_ray
 	int		tex_x;
 }	t_ray;
 
+typedef struct s_camera_config
+{
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}	t_camera_config;
+
 // main.c
 void	error_exit(char *msg, t_game *game);
 
@@ -171,6 +179,8 @@ void	debug(const char *f, ...);
 
 // parser.c
 void	parse_map(char *file, t_game *game);
+void	add_line_to_map(t_game *g, char *l);
+void	find_player_start(t_game *g, char *l, int row);
 
 // configuration_line_parser.c
 bool	parse_texture_configuration(char *l, t_game *g);
@@ -202,7 +212,6 @@ void	free_map(char **map, int height);
 // file_validator.c
 int		is_valid_extension(char *file);
 
-
 void	put_pixel(t_game *g, int x, int y, int color);
 
 // renderer.c
@@ -213,6 +222,7 @@ int		render_next_frame(void *param);
 void	init_ray(t_game *g, int x, t_ray *r);
 void	do_dda(t_game *g, t_ray *r);
 void	compute_draw_parameters(t_game *g, t_ray *r);
+void	init_camera(t_game *g);
 
 // void compute_step_side(t_game *g, t_ray *r);
 void	move_dir(t_game *g, double dx, double dy);
