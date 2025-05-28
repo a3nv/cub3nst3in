@@ -103,6 +103,7 @@ typedef struct s_game
 	double	pos_x;
 	double	pos_y;
 	char	start_dir;
+	int		player_counter;
 
 	/* offscreen render buffer */
 	void	*img_ptr;
@@ -180,7 +181,7 @@ void	debug(const char *f, ...);
 // parser.c
 void	parse_map(char *file, t_game *game);
 void	add_line_to_map(t_game *g, char *l);
-void	find_player_start(t_game *g, char *l, int row);
+bool	find_player_start(t_game *g, char *l, int row);
 
 // configuration_line_parser.c
 bool	parse_texture_configuration(char *l, t_game *g);
@@ -194,17 +195,19 @@ int		is_color_configuration(char *l);
 int		is_configuration_line(char *l);
 void	set_error_message(t_game *g, char *m, int s);
 t_pair	*parse_configuration(char *l);
-bool	is_map_line(const char *l);
 
 // parser_gc.c
 void	exit_with_free(char	*map_str, char *msg, t_game *game);
 void	cleanup_reading(char *line, char *temp);
 
-// parser_utils_map_line.c
-bool	is_map_line(const char *l);
-
 // parser_validator.c
 int		has_consecutive_newlines(char *map_str);
+
+// map_validator.c
+bool	is_map_valid(t_game *g);
+
+// map_validator_utils.c
+bool	is_player(const char c);
 
 // gc.c
 void	free_map(char **map, int height);

@@ -14,20 +14,17 @@
 
 bool	parse_map_line(char *l, t_game *g)
 {
-	int	row;
+	int		row;
+	char	*t;
 
 	if (g->map == NULL)
-	{
-		if (!is_map_line(l))
-			return (true);
 		g->map = array_list_create(1);
-	}
-	if (!is_map_line(l))
-		return (false);
-	add_line_to_map(g, l);
+	t = ft_strtrim(l, " \t");
+	if (ft_strlen(t) == 0 || *t == '\n')
+		return (free(t), true);
+	array_list_add(g->map, l);
 	row = g->map->size - 1;
-	find_player_start(g, l, row);
-	return (true);
+	return (find_player_start(g, l, row));
 }
 
 bool	process_line(char *l, t_game *g)

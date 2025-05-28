@@ -14,21 +14,19 @@
 
 void	add_line_to_map(t_game *g, char *l)
 {
-	if (!is_map_line(l))
-		error_exit("Error\nInvalid map line encountered\n", g);
 	array_list_add(g->map, l);
 }
 
-void	find_player_start(t_game *g, char *l, int row)
+bool	find_player_start(t_game *g, char *l, int row)
 {
 	int	col;
 
 	col = 0;
 	while (l[col])
 	{
-		if (l[col] == 'N' || l[col] == 'S'
-			|| l[col] == 'E' || l[col] == 'W')
+		if (is_player(l[col]))
 		{
+			g->player_counter++;
 			g->player_x = col;
 			g->player_y = row;
 			g->start_dir = l[col];
@@ -38,4 +36,5 @@ void	find_player_start(t_game *g, char *l, int row)
 		}
 		col++;
 	}
+	return (true);
 }
