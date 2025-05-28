@@ -21,9 +21,10 @@ SRC = src/main.c \
 		src/parser/configuration_file_parser_utils.c \
 		src/parser/parser_configuration_line.c \
 		src/parser/parser_utils_configuration_line.c \
-		src/parser/parser_utils_map_line.c \
 		src/validator/file_validator.c \
 		src/validator/parser_validator.c \
+		src/validator/map_validator.c \
+		src/validator/map_validator_utils.c \
 		src/renderer/init_render.c \
 		src/renderer/camera_utils.c \
 		src/renderer/raycaster.c \
