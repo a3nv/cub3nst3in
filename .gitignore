@@ -1,3 +1,11 @@
+.vscode
+mlx/
+bin/
+build/
+libft/build/
+libft/*.a
+*.gcno
+
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
