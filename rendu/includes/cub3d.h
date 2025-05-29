@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:59:53 by iasonov           #+#    #+#             */
-/*   Updated: 2025/05/04 00:11:20 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/05/29 20:58:17 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,8 +209,8 @@ bool	is_map_valid(t_game *g);
 // map_validator_utils.c
 bool	is_player(const char c);
 
-// gc.c
-void	free_map(char **map, int height);
+// application_gc.c
+void	*destroy_game(t_game *g);
 
 // file_validator.c
 int		is_valid_extension(char *file);
@@ -221,7 +221,6 @@ void	put_pixel(t_game *g, int x, int y, int color);
 int		render_next_frame(void *param);
 void	draw_floor_and_ceiling(t_game *g);
 void	cast_single_ray(t_game *g, int x);
-int		render_next_frame(void *param);
 void	init_ray(t_game *g, int x, t_ray *r);
 void	do_dda(t_game *g, t_ray *r);
 void	compute_draw_parameters(t_game *g, t_ray *r);

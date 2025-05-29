@@ -12,12 +12,11 @@
 
 #include "../includes/cub3d.h"
 
-void	error_exit(char *msg, t_game *game)
+void	error_exit(char *msg, t_game *g)
 {
-	if (game && game->map)
-		array_list_free(game->map);
 	ft_putstr_fd("Error\n", STDERR_FILENO);
 	ft_putstr_fd(msg, STDERR_FILENO);
+	destroy_game(g);
 	exit(EXIT_FAILURE);
 }
 

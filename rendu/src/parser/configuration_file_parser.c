@@ -24,7 +24,7 @@ bool	parse_map_line(char *l, t_game *g)
 		return (free(t), true);
 	array_list_add(g->map, l);
 	row = g->map->size - 1;
-	return (find_player_start(g, l, row));
+	return (free(t), find_player_start(g, l, row));
 }
 
 bool	process_line(char *l, t_game *g)

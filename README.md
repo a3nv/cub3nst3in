@@ -4,6 +4,12 @@
 
 [Minilibx](https://github.com/42paris/minilibx-linux)
 
+
+## 
+```bash
+valgrind --leak-check=full --show-leak-kinds=all bin/cub3D maps/rd.cub
+```
+
 ## Codecov
 
 When updating codecov.yml do not forget to validate it!
