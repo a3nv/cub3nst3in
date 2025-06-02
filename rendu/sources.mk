@@ -6,7 +6,7 @@
 #    By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/12 16:21:22 by iasonov           #+#    #+#              #
-#    Updated: 2025/05/04 00:12:12 by iasonov          ###   ########.fr        #
+#    Updated: 2025/06/02 21:48:40 by iasonov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,9 @@ SRC = src/main.c \
 		src/parser/configuration_file_parser_utils.c \
 		src/parser/parser_configuration_line.c \
 		src/parser/parser_utils_configuration_line.c \
+		src/parser/parser_color.c \
+		src/parser/parser_helpers.c \
+		src/parser/parser_texture.c \
 		src/validator/file_validator.c \
 		src/validator/parser_validator.c \
 		src/validator/map_validator.c \

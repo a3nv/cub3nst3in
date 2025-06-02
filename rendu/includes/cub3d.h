@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:59:53 by iasonov           #+#    #+#             */
-/*   Updated: 2025/05/29 20:58:17 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/06/02 22:02:16 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef struct s_game
 
 	char	*error_message;
 	int		status;
+	bool	running;
 }	t_game;
 
 typedef struct s_ray
@@ -190,11 +191,23 @@ bool	parse_color_configuration(char *l, t_game *g);
 bool	extract_rgb(t_game *g, t_pair *p, t_rgb *rgb);
 
 // configuration_line_parser_utils.c
-int		is_texture_configuration(char *l);
-int		is_color_configuration(char *l);
 int		is_configuration_line(char *l);
 void	set_error_message(t_game *g, char *m, int s);
+
+// parser_color.c
+bool	extract_rgb(t_game *g, t_pair *p, t_rgb *rgb);
+bool	set_rgb(t_game *g, t_rgb *rgb, t_pair *p);
+bool	parse_color_configuration(char *l, t_game *g);
+bool	is_color_configuration(char *l);
+
+// parser_helpersc
 t_pair	*parse_configuration(char *l);
+void	free_pair(t_pair *p);
+void	ft_free_split(char **arr);
+
+// parser_texture.c
+bool	parse_texture_configuration(char *l, t_game *g);
+bool	is_texture_configuration(char *l);
 
 // parser_gc.c
 void	exit_with_free(char	*map_str, char *msg, t_game *game);

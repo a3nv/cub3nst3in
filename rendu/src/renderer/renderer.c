@@ -46,6 +46,8 @@ int	render_next_frame(void *param)
 	t_game	*g;
 
 	g = (t_game *)param;
+	if (!g->running)
+		return (0);
 	handle_movement(g);
 	render_scene(g);
 	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_ptr, 0, 0);
