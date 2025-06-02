@@ -28,8 +28,8 @@ void	put_pixel(t_game *g, int x, int y, int color)
 */
 void	draw_floor_and_ceiling(t_game *g)
 {
-	int	y;
 	int	x;
+	int	y;
 
 	y = 0;
 	while (y < W_H)
@@ -37,10 +37,10 @@ void	draw_floor_and_ceiling(t_game *g)
 		x = 0;
 		while (x < W_W)
 		{
-			if (y < W_H / 2)
-				put_pixel(g, x, y, g->ceiling->hex);
-			else
+			if (y >= W_H / 2)
 				put_pixel(g, x, y, g->floor->hex);
+			else
+				put_pixel(g, x, y, g->ceiling->hex);
 			x++;
 		}
 		y++;

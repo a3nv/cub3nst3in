@@ -11,16 +11,67 @@
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-#include <stdlib.h>
+
+void	init_player(t_game *g)
+{
+	g->player_x = -1;
+	g->player_y = -1;
+	g->start_dir = '\0';
+	g->pos_x = 0.0;
+	g->pos_y = 0.0;
+}
+
+void	init_map(t_game *g)
+{
+	int	i;
+
+	g->map = NULL;
+	g->player_counter = 0;
+	init_player(g);
+	g->no_ptr = NULL;
+	g->so_ptr = NULL;
+	g->we_ptr = NULL;
+	g->ea_ptr = NULL;
+	g->floor = NULL;
+	g->ceiling = NULL;
+	g->img_ptr = NULL;
+	g->img_data = NULL;
+	i = 0;
+	while (i < 4)
+	{
+		g->tex_img[i] = NULL;
+		g->tex_data[i] = NULL;
+		g->tex_w[i] = 0;
+		g->tex_h[i] = 0;
+		i++;
+	}
+}
+
+void	init_movement(t_game *g)
+{
+	g->key_w = 0;
+	g->key_s = 0;
+	g->key_a = 0;
+	g->key_d = 0;
+	g->key_left = 0;
+	g->key_right = 0;
+	g->dir_x = 0.0;
+	g->dir_y = 0.0;
+	g->plane_x = 0.0;
+	g->plane_y = 0.0;
+	g->move_speed = 0.0;
+	g->rot_speed = 0.0;
+	g->running = true;
+}
 
 void	set_defaults(t_game *g)
 {
 	g->mlx_ptr = NULL;
 	g->win_ptr = NULL;
-	g->win_ptr = NULL;
 	g->status = 1;
-	g->player_x = -1;
-	g->player_y = -1;
+	g->error_message = NULL;
+	init_map(g);
+	init_movement(g);
 }
 
 t_game	*init_game(char *file)

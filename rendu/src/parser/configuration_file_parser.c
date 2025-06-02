@@ -22,9 +22,10 @@ bool	parse_map_line(char *l, t_game *g)
 	t = ft_strtrim(l, " \t");
 	if (ft_strlen(t) == 0 || *t == '\n')
 		return (free(t), true);
+	free(t);
 	array_list_add(g->map, l);
 	row = g->map->size - 1;
-	return (free(t), find_player_start(g, l, row));
+	return (find_player_start(g, l, row));
 }
 
 bool	process_line(char *l, t_game *g)
@@ -61,29 +62,6 @@ void	read_map_lines(int fd, t_game *g)
 	}
 }
 
-void	print_game(t_game *g)
-{
-	int	i;
-
-	debug("Control no: %s\n", g->no_ptr);
-	debug("Control so: %s\n", g->so_ptr);
-	debug("Control we: %s\n", g->we_ptr);
-	debug("Control ea: %s\n", g->ea_ptr);
-	if (g->floor)
-		debug("Control f: %s\n", g->floor->hex_str);
-	if (g->ceiling)
-		debug("Control c: %s\n", g->ceiling->hex_str);
-	i = 0;
-	if (g->map)
-	{
-		while (g->map->data[i])
-		{
-			debug("Line %d: %s", i, g->map->data[i]);
-			i++;
-		}
-	}
-}
-
 void	parse_map(char *file, t_game *g)
 {
 	int		fd;
@@ -92,7 +70,5 @@ void	parse_map(char *file, t_game *g)
 	if (fd < 0)
 		error_exit("Failed to open map file\n", NULL);
 	read_map_lines(fd, g);
-	if (g->status != E)
-		print_game(g);
 	close(fd);
 }

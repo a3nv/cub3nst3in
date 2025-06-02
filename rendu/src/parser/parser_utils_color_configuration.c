@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils_configuration_line.c                  :+:      :+:    :+:   */
+/*   parser_utils_color_configuration.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 11:34:49 by iasonov           #+#    #+#             */
-/*   Updated: 2025/06/02 21:56:13 by iasonov          ###   ########.fr       */
+/*   Created: 2025/06/02 21:03:51 by iasonov           #+#    #+#             */
+/*   Updated: 2025/06/02 21:37:04 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
-
-int	is_configuration_line(char *l)
+int	rgb_to_hex(int r, int g, int b)
 {
-	return (is_texture_configuration(l) || is_color_configuration(l));
-}
-
-void	set_error_message(t_game *g, char *m, int s)
-{
-	g->error_message = ft_strdup(m);
-	g->status = s;
+	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
 }

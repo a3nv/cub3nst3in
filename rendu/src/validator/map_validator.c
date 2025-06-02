@@ -95,5 +95,11 @@ bool	is_map_valid(t_game *g)
 	}
 	if (g->status != E && !check_enclosure(g))
 		return (false);
+	if (g->status != E && (g->floor == NULL || g->ceiling == NULL))
+	{
+		g->status = E;
+		g->error_message = ft_strdup("Error: F/C colors missing\n");
+		return (false);
+	}
 	return (true);
 }

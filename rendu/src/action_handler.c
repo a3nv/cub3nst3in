@@ -17,7 +17,14 @@ int	handle_exit(void *param)
 	t_game	*g;
 
 	g = (t_game *)param;
+	g->running = false;
+	if (g->win_ptr)
+	{
+		mlx_destroy_window(g->mlx_ptr, g->win_ptr);
+		g->win_ptr = NULL;
+	}
 	destroy_game(g);
+	exit(0);
 	return (0);
 }
 
