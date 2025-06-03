@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:02:17 by iasonov           #+#    #+#             */
-/*   Updated: 2025/04/13 00:44:59 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/06/03 21:39:39 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*itox(unsigned int n)
 	{
 		b[i++] = '0';
 		b[i] = '\0';
-		return (NULL);
+		return (b);
 	}
 	transform(n, b, &i);
 	reverse(b, i);
