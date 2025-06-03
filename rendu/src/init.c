@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:45:35 by iasonov           #+#    #+#             */
-/*   Updated: 2025/05/27 21:01:19 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/06/03 20:48:56 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	set_defaults(t_game *g)
 	g->mlx_ptr = NULL;
 	g->win_ptr = NULL;
 	g->status = 1;
-	g->error_message = NULL;
+	g->em = NULL;
 	init_map(g);
 	init_movement(g);
 }
@@ -87,11 +87,11 @@ t_game	*init_game(char *file)
 	{
 		g->mlx_ptr = mlx_init();
 		if (!g->mlx_ptr)
-			error_exit("Error\nFailed to init MLX\n", g);
+			error_exit("Error: Failed to init MLX\n", g);
+		init_rendering(g);
 		g->win_ptr = mlx_new_window(g->mlx_ptr, W_W, W_H, "cub3d");
 		if (!g->win_ptr)
-			error_exit("Error\nFailed to create window\n", g);
-		init_rendering(g);
+			error_exit("Error: Failed to create window\n", g);
 	}
 	return (g);
 }

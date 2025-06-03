@@ -6,11 +6,33 @@
 /*   By: iasonov <iasonov@student.42prague.com>	 +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2025/05/12 00:00:00 by iasonov		   #+#	#+#			 */
-/*   Updated: 2025/06/02 21:52:32 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/06/03 20:40:41 by iasonov          ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+bool	validate_and_assign_rgb(t_game *g, char **colors, t_rgb *rgb)
+{
+	int	vals[3];
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		vals[i] = ft_atoi(colors[i]);
+		if (vals[i] < 0 || vals[i] > 255)
+		{
+			set_em(g, "Error: Invalid color code\n", E);
+			return (false);
+		}
+		i++;
+	}
+	rgb->r = vals[0];
+	rgb->g = vals[1];
+	rgb->b = vals[2];
+	return (true);
+}
 
 /*
   extract_rgb:
@@ -27,12 +49,14 @@ bool	extract_rgb(t_game *g, t_pair *p, t_rgb *rgb)
 	colors = ft_split(p->second, ',');
 	if (!colors || !colors[0] || !colors[1] || !colors[2] || colors[3])
 	{
-		set_error_message(g, "Incorrect colors\n", E);
+		set_em(g, "Error: Incorrect colors\n", E);
 		return (false);
 	}
-	rgb->r = ft_atoi(colors[0]);
-	rgb->g = ft_atoi(colors[1]);
-	rgb->b = ft_atoi(colors[2]);
+	if (!validate_and_assign_rgb(g, colors, rgb))
+	{
+		ft_free_split(colors);
+		return (false);
+	}
 	rgb->hex = (rgb->r << 16) | (rgb->g << 8) | rgb->b;
 	hex_digits = itox(rgb->hex);
 	rgb->hex_str = ft_strjoin("0x", hex_digits);
@@ -50,12 +74,18 @@ bool	extract_rgb(t_game *g, t_pair *p, t_rgb *rgb)
 bool	set_rgb(t_game *g, t_rgb *rgb, t_pair *p)
 {
 	if (ft_strcmp(p->first, "F") == 0)
+	{
+		free_color(&g->floor);
 		g->floor = rgb;
+	}
 	else if (ft_strcmp(p->first, "C") == 0)
+	{
+		free_color(&g->ceiling);
 		g->ceiling = rgb;
+	}
 	else
 	{
-		set_error_message(g, "Unknown configuration identifier\n", E);
+		set_em(g, "Error: Unknown configuration identifier\n", E);
 		free_pair(p);
 		free(rgb);
 		return (false);
@@ -79,13 +109,13 @@ bool	parse_color_configuration(char *l, t_game *g)
 	rgb = malloc(sizeof(t_rgb));
 	if (!rgb)
 	{
-		set_error_message(g, "Failed parse configuration\n", E);
+		set_em(g, "Error: Failed parse configuration\n", E);
 		return (false);
 	}
 	p = parse_configuration(l);
 	if (!p)
 	{
-		set_error_message(g, "Failed parse configuration\n", E);
+		set_em(g, "Error: Failed parse configuration\n", E);
 		return (free(rgb), false);
 	}
 	if (!extract_rgb(g, p, rgb))

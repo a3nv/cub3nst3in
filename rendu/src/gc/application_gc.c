@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 23:43:49 by iasonov           #+#    #+#             */
-/*   Updated: 2025/06/02 22:03:37 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/06/03 19:40:15 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_map(t_game *g)
 /*
 ** Frees the four texture‐path strings (no_ptr, so_ptr, we_ptr, ea_ptr).
 */
-static void	free_texture_paths(t_game *g)
+void	free_texture_paths(t_game *g)
 {
 	if (g->no_ptr)
 	{
@@ -51,7 +51,7 @@ static void	free_texture_paths(t_game *g)
 /*
 ** Frees a single t_rgb (floor or ceiling), including its hex_str.
 */
-static void	free_color(t_rgb **color)
+void	free_color(t_rgb **color)
 {
 	if (*color)
 	{
@@ -65,7 +65,7 @@ static void	free_color(t_rgb **color)
 /*
 ** Destroys the MLX display and frees the mlx_ptr itself.
 */
-static void	free_mlx(t_game *g)
+void	free_mlx(t_game *g)
 {
 	if (g->mlx_ptr)
 	{
@@ -99,7 +99,7 @@ void	*destroy_game(t_game *g)
 	free_color(&g->floor);
 	free_color(&g->ceiling);
 	free_mlx(g);
-	free(g->error_message);
+	free(g->em);
 	free(g);
 	return (NULL);
 }
