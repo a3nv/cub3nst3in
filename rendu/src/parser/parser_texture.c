@@ -1,16 +1,29 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   parser_texture.c								   :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: iasonov <iasonov@student.42prague.com>	 +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/05/12 00:00:00 by iasonov		   #+#	#+#			 */
-/*   Updated: 2025/06/02 21:43:04 by iasonov		  ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_texture.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/03 20:54:58 by iasonov           #+#    #+#             */
+/*   Updated: 2025/06/03 20:55:12 by iasonov          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	assign(char **dest, char *src)
+{
+	if (*dest != NULL)
+	{
+		free(*dest);
+		*dest = NULL;
+	}
+	if (src != NULL)
+		*dest = ft_strdup(src);
+	else
+		*dest = NULL;
+}
 
 /*
   parse_texture_configuration:
@@ -25,20 +38,20 @@ bool	parse_texture_configuration(char *l, t_game *g)
 	p = parse_configuration(l);
 	if (!p)
 	{
-		set_error_message(g, "Failed parse configuration\n", E);
+		set_em(g, "Failed parse configuration\n", E);
 		return (false);
 	}
 	if (ft_strncmp(p->first, "NO", 2) == 0)
-		g->no_ptr = ft_strdup(p->second);
+		assign(&g->no_ptr, p->second);
 	else if (ft_strncmp(p->first, "SO", 2) == 0)
-		g->so_ptr = ft_strdup(p->second);
+		assign(&g->so_ptr, p->second);
 	else if (ft_strncmp(p->first, "WE", 2) == 0)
-		g->we_ptr = ft_strdup(p->second);
+		assign(&g->we_ptr, p->second);
 	else if (ft_strncmp(p->first, "EA", 2) == 0)
-		g->ea_ptr = ft_strdup(p->second);
+		assign(&g->ea_ptr, p->second);
 	else
 	{
-		set_error_message(g, "Unknown configuration identifier\n", E);
+		set_em(g, "Unknown configuration identifier\n", E);
 		free_pair(p);
 		return (false);
 	}

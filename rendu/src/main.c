@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:59:27 by iasonov           #+#    #+#             */
-/*   Updated: 2025/05/03 22:28:35 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/06/03 19:24:38 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	error_exit(char *msg, t_game *g)
 {
-	ft_putstr_fd("Error\n", STDERR_FILENO);
 	ft_putstr_fd(msg, STDERR_FILENO);
 	destroy_game(g);
 	exit(EXIT_FAILURE);
@@ -34,12 +33,12 @@ int	main(int argc, char **argv)
 	t_game	*g;
 
 	if (argc != 2)
-		error_exit("Usage: ./cub3d <map_file.cub>\n", NULL);
+		error_exit("Error: Usage: ./cub3d <map_file.cub>\n", NULL);
 	if (!is_valid_extension(argv[1]))
-		error_exit("Invalid file extension. Please provide .cub file\n", NULL);
+		error_exit("Error: Invalid file extension. Please use .cub\n", NULL);
 	g = init_game(argv[1]);
 	if (g->status == E)
-		error_exit(g->error_message, g);
+		error_exit(g->em, g);
 	mlx(g);
 	return (0);
 }

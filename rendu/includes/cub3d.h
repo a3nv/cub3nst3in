@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:59:53 by iasonov           #+#    #+#             */
-/*   Updated: 2025/06/02 22:02:16 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/06/03 19:40:54 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ typedef struct s_game
 	int		key_left;
 	int		key_right;
 
-	char	*error_message;
+	char	*em;
 	int		status;
 	bool	running;
 }	t_game;
@@ -192,7 +192,7 @@ bool	extract_rgb(t_game *g, t_pair *p, t_rgb *rgb);
 
 // configuration_line_parser_utils.c
 int		is_configuration_line(char *l);
-void	set_error_message(t_game *g, char *m, int s);
+void	set_em(t_game *g, char *m, int s);
 
 // parser_color.c
 bool	extract_rgb(t_game *g, t_pair *p, t_rgb *rgb);
@@ -224,6 +224,7 @@ bool	is_player(const char c);
 
 // application_gc.c
 void	*destroy_game(t_game *g);
+void	free_color(t_rgb **color);
 
 // file_validator.c
 int		is_valid_extension(char *file);

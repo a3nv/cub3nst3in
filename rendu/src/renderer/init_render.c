@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 22:23:58 by iasonov           #+#    #+#             */
-/*   Updated: 2025/05/04 00:04:26 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/06/03 20:44:41 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_texture(t_game *g, int idx, char *path)
 
 	img = mlx_xpm_file_to_image(g->mlx_ptr, path, &w, &h);
 	if (!img)
-		error_exit("Error\nFailed to load texture\n", g);
+		error_exit("Error: Failed to load texture\n", g);
 	data = mlx_get_data_addr(img, &tmp, &tmp, &tmp);
 	g->tex_img[idx] = img;
 	g->tex_data[idx] = data;

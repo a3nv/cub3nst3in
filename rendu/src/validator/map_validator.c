@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 20:55:55 by iasonov           #+#    #+#             */
-/*   Updated: 2025/05/27 20:57:11 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/06/03 20:20:53 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ bool	validate_chars_and_player(t_game *g)
 			c = get_cell(g, row, col);
 			if (c != '0' && c != '1' && !is_player(c) && c != ' ' && c != '\n')
 			{
-				printf("Invalid character in map: %c\n", c);
-				g->error_message = "Error: Invalid character in map\n";
-				g->status = E;
+				set_em(g, "Error: Invalid character in map\n", E);
 				return (false);
 			}
 			col++;
@@ -71,8 +69,7 @@ bool	check_enclosure(t_game *g)
 			{
 				if (check_cell(row, col, g))
 				{
-					g->error_message = "Error: Map is not closed by walls\n";
-					g->status = E;
+					set_em(g, "Error: unclosed map\n", E);
 					return (false);
 				}
 			}
@@ -85,20 +82,20 @@ bool	check_enclosure(t_game *g)
 
 bool	is_map_valid(t_game *g)
 {
-	if (g->status != E && !validate_chars_and_player(g))
+	if (g->status == E)
 		return (false);
-	if (g->status != E && g->player_counter != 1)
+	if (!validate_chars_and_player(g))
+		return (false);
+	if (g->player_counter != 1)
 	{
-		g->status = E;
-		g->error_message = "Error: Invalid number of players\n";
+		set_em(g, "Error: Invalid number of players\n", E);
 		return (false);
 	}
-	if (g->status != E && !check_enclosure(g))
+	if (!check_enclosure(g))
 		return (false);
-	if (g->status != E && (g->floor == NULL || g->ceiling == NULL))
+	if (g->floor == NULL || g->ceiling == NULL)
 	{
-		g->status = E;
-		g->error_message = ft_strdup("Error: F/C colors missing\n");
+		set_em(g, "Error: F/C colors missing\n", E);
 		return (false);
 	}
 	return (true);

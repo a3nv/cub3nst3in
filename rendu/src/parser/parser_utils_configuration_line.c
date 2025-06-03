@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 11:34:49 by iasonov           #+#    #+#             */
-/*   Updated: 2025/06/02 21:56:13 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/06/03 19:24:54 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	is_configuration_line(char *l)
 	return (is_texture_configuration(l) || is_color_configuration(l));
 }
 
-void	set_error_message(t_game *g, char *m, int s)
+void	set_em(t_game *g, char *m, int s)
 {
-	g->error_message = ft_strdup(m);
+	g->em = ft_strdup(m);
 	g->status = s;
 }

@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 23:49:26 by iasonov           #+#    #+#             */
-/*   Updated: 2025/05/03 22:31:26 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/06/03 20:30:50 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ void	read_map_lines(int fd, t_game *g)
 	while (l && g->status != E)
 	{
 		if (!process_line(l, g))
-		{
-			free(l);
 			break ;
-		}
 		free(l);
 		l = get_next_line(fd);
 	}
+	free(l);
+	cleanup();
 }
 
 void	parse_map(char *file, t_game *g)
