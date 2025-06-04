@@ -6,7 +6,7 @@
 /*   By: anon <anon@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 10:26:29 by anon              #+#    #+#             */
-/*   Updated: 2025/06/04 10:26:34 by anon             ###   ########.fr       */
+/*   Updated: 2025/06/04 10:54:33 by anon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,14 @@ int	check_zero_adjacent_cells(t_game *g, int row, int col)
 
 	if (!get_map_size(g, row, &height, &width))
 		return (0);
-	if (row < 0 || col < 0 || row >= height || col >= width) // TODO: check whether the offsets correct
+	if (row < 0 || col < 0 || row >= height || col >= width)
 		return (0);
 	if (row == 0 || col == 0 || row == height || col == width)
 		return (0);
-	if ((gcs(g, row - 1, col) == '1' || gcs(g, row - 1, col) == '0') && (gcs(g,
-				row + 1, col) == '1' || gcs(g, row + 1, col) == '0') && (gcs(g,
-				row, col - 1) == '1' || gcs(g, row, col - 1) == '0') && (gcs(g,
-				row, col + 1) == '1' || gcs(g, row, col + 1) == '0'))
+	if ((gcs(g, row - 1, col) == '1' || gcs(g, row - 1, col) == '0')
+		&& (gcs(g, row + 1, col) == '1' || gcs(g, row + 1, col) == '0')
+		&& (gcs(g, row, col - 1) == '1' || gcs(g, row, col - 1) == '0')
+		&& (gcs(g, row, col + 1) == '1' || gcs(g, row, col + 1) == '0'))
 		return (1);
 	return (0);
 }
