@@ -62,6 +62,7 @@ char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
+int				count_splits(const char *s, char c);
 // also used in ft_split_mult
 int				do_copy(char **dst, int length, const char *s, int start);
 char			**ft_split_mult(char *str, char *charset);

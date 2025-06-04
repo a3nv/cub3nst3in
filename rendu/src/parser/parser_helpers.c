@@ -46,12 +46,14 @@ t_pair	*parse_configuration(char *l)
   – Frees each string, then frees the array pointer itself.
   – Handy for cleaning up after extract_rgb() above.
 */
-void	ft_free_split(char **arr)
+void	ft_free_split(char **arr, const char *s, char c)
 {
 	int	i;
+	int l;
 
 	i = 0;
-	while (i < 3)
+	l = count_splits(s, c);
+	while (i < l)
 	{
 		if (arr[i])
 			free(arr[i]);

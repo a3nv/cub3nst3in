@@ -203,7 +203,7 @@ bool	is_color_configuration(char *l);
 // parser_helpersc
 t_pair	*parse_configuration(char *l);
 void	free_pair(t_pair *p);
-void	ft_free_split(char **arr);
+void	ft_free_split(char **arr, const char *s, char c);
 
 // parser_texture.c
 bool	parse_texture_configuration(char *l, t_game *g);

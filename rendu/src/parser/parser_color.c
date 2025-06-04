@@ -50,19 +50,19 @@ bool	extract_rgb(t_game *g, t_pair *p, t_rgb *rgb)
 	if (!colors || !colors[0] || !colors[1] || !colors[2] || colors[3])
 	{
 		set_em(g, "Error: Incorrect colors\n", E);
-		ft_free_split(colors);
+		ft_free_split(colors, p->second, ',');
 		return (false);
 	}
 	if (!validate_and_assign_rgb(g, colors, rgb))
 	{
-		ft_free_split(colors);
+		ft_free_split(colors, p->second, ',');
 		return (false);
 	}
 	rgb->hex = (rgb->r << 16) | (rgb->g << 8) | rgb->b;
 	hex_digits = itox(rgb->hex);
 	rgb->hex_str = ft_strjoin("0x", hex_digits);
 	free(hex_digits);
-	ft_free_split(colors);
+	ft_free_split(colors, p->second, ',');
 	return (true);
 }
 
