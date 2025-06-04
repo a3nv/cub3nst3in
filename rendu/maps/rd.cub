@@ -1,10 +1,11 @@
+C 135,206,235
+F 161,64,43
+
+
 NO ./textures/brick1.xpm
 SO ./textures/brick2.xpm
 WE ./textures/brick3.xpm
 EA ./textures/brick4.xpm
-
-C 58,50,45
-F 75,200,195
 
         1111111111111111111111111
         1000000000110000000000001

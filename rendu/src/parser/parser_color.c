@@ -50,6 +50,7 @@ bool	extract_rgb(t_game *g, t_pair *p, t_rgb *rgb)
 	if (!colors || !colors[0] || !colors[1] || !colors[2] || colors[3])
 	{
 		set_em(g, "Error: Incorrect colors\n", E);
+		ft_free_split(colors);
 		return (false);
 	}
 	if (!validate_and_assign_rgb(g, colors, rgb))

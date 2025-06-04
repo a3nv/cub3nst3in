@@ -51,9 +51,10 @@ void	ft_free_split(char **arr)
 	int	i;
 
 	i = 0;
-	while (arr[i])
+	while (i < 3)
 	{
-		free(arr[i]);
+		if (arr[i])
+			free(arr[i]);
 		i++;
 	}
 	free(arr);
