@@ -219,6 +219,9 @@ int		has_consecutive_newlines(char *map_str);
 // map_validator.c
 bool	is_map_valid(t_game *g);
 
+// map_enclosure_check.c
+bool  check_enclosure(t_game *g);
+
 // map_validator_utils.c
 bool	is_player(const char c);
 

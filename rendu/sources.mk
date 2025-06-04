@@ -27,6 +27,7 @@ SRC = src/main.c \
 		src/validator/file_validator.c \
 		src/validator/parser_validator.c \
 		src/validator/map_validator.c \
+		src/validator/map_enclosure_check.c \
 		src/validator/map_validator_utils.c \
 		src/renderer/init_render.c \
 		src/renderer/camera_utils.c \
