@@ -46,40 +46,6 @@ bool	validate_chars_and_player(t_game *g)
 	return (true);
 }
 
-bool	check_cell(int row, int col, t_game *g)
-{
-	return (get_cell(g, row - 1, col) == ' '
-		|| get_cell(g, row + 1, col) == ' '
-		|| get_cell(g, row, col - 1) == ' '
-		|| get_cell(g, row, col + 1) == ' ');
-}
-
-bool	check_enclosure(t_game *g)
-{
-	int		row;
-	int		col;
-
-	row = 0;
-	while (g->map->data[row])
-	{
-		col = 0;
-		while (get_cell(g, row, col) != '\n' && get_cell(g, row, col) != '\0')
-		{
-			if (get_cell(g, row, col) != '1' && get_cell(g, row, col) != ' ')
-			{
-				if (check_cell(row, col, g))
-				{
-					set_em(g, "Error: unclosed map\n", E);
-					return (false);
-				}
-			}
-			col++;
-		}
-		row++;
-	}
-	return (true);
-}
-
 bool	is_map_valid(t_game *g)
 {
 	if (g->status == E)
