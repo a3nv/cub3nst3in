@@ -70,7 +70,7 @@ char	*itox(unsigned int n)
 	char	*b;
 
 	l = number_len(n);
-	b = malloc(sizeof(char) * l);
+	b = malloc(sizeof(char) * (l + 1));
 	if (!b)
 		return (NULL);
 	i = 0;
@@ -81,6 +81,7 @@ char	*itox(unsigned int n)
 		return (b);
 	}
 	transform(n, b, &i);
+	b[i] = '\0';
 	reverse(b, i);
 	return (b);
 }
