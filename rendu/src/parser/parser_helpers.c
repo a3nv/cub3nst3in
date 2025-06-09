@@ -49,7 +49,7 @@ t_pair	*parse_configuration(char *l)
 void	ft_free_split(char **arr, const char *s, char c)
 {
 	int	i;
-	int l;
+	int	l;
 
 	i = 0;
 	l = count_splits(s, c);
