@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_array_list_remove.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
+/*   By: anon <anon@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 22:42:50 by iasonov           #+#    #+#             */
-/*   Updated: 2025/02/20 20:37:26 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/06/09 15:51:27 by anon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	array_list_remove(t_array_list *list, char *element)
 	int	match;
 	int	i;
 
-	 if (!list || !element || !list->data || list->size == 0)
-        return ;
+	if (!list || !element || !list->data || list->size == 0)
+		return ;
 	match = find_matched_key(element, list->data);
 	if (match == -1)
 		return ;
