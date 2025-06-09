@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itox.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
+/*   By: anon <anon@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:02:17 by iasonov           #+#    #+#             */
-/*   Updated: 2025/06/03 21:39:39 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/06/09 15:35:17 by anon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,8 @@ char	*itox(unsigned int n)
 	i = 0;
 	if (n == 0)
 	{
-		b[i++] = '0';
-		b[i] = '\0';
-		return (b);
+		free(b);
+		return (ft_strdup("0"));
 	}
 	transform(n, b, &i);
 	b[i] = '\0';
