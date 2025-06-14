@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 23:43:49 by iasonov           #+#    #+#             */
-/*   Updated: 2025/06/03 19:40:15 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/06/14 21:59:46 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,10 @@ void	*destroy_game(t_game *g)
 	int	i;
 
 	if (!g)
+	{
+		free(g);
 		return (NULL);
+	}
 	if (g->mlx_ptr && g->img_ptr)
 		mlx_destroy_image(g->mlx_ptr, g->img_ptr);
 	i = 0;
