@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*																			*/
 /*														:::	  ::::::::   */
-/*   parser_helpers.c								   :+:	  :+:	:+:   */
+/*   parser_helpers.c                                   :+:      :+:    :+:   */
 /*													+:+ +:+		 +:+	 */
 /*   By: iasonov <iasonov@student.42prague.com>	 +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2025/05/12 00:00:00 by iasonov		   #+#	#+#			 */
-/*   Updated: 2025/06/02 21:44:10 by iasonov		  ###   ########.fr	   */
+/*   Updated: 2025/06/14 17:24:23 by iasonov          ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_pair	*parse_configuration(char *l)
 void	ft_free_split(char **arr, const char *s, char c)
 {
 	int	i;
-	int l;
+	int	l;
 
 	i = 0;
 	l = count_splits(s, c);

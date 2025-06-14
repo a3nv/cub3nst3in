@@ -6,7 +6,7 @@
 /*   By: iasonov <iasonov@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:59:53 by iasonov           #+#    #+#             */
-/*   Updated: 2025/06/03 19:40:54 by iasonov          ###   ########.fr       */
+/*   Updated: 2025/06/14 17:25:06 by iasonov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,7 @@ int		has_consecutive_newlines(char *map_str);
 bool	is_map_valid(t_game *g);
 
 // map_enclosure_check.c
-bool  check_enclosure(t_game *g);
+bool	check_enclosure(t_game *g);
 
 // map_validator_utils.c
 bool	is_player(const char c);

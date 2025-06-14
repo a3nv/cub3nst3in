@@ -23,11 +23,9 @@ jobs:
       - name: Upgrade pip and setuptools
         run: |
           python3 -m pip install --upgrade pip setuptools
-
-      - name: Install norminette (pip)
+      - name: Install norminette (pip) v3.3.58
         run: |
-          python3 -m pip install norminette
-
+          python3 -m pip install norminette==3.3.58
       - name: Build mlx
         run: |
           cd mlx
